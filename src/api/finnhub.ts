@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-const FINNHUB_API_KEY = 'cu6al39r01qujm3q6mg0cu6al39r01qujm3q6mgg';
+const FINNHUB_API_KEY = 'YOUR_FINNFUB_API_KEY';
 const FINNHUB_API = axios.create({
   baseURL: 'https://finnhub.io/api/v1',
   params: {
