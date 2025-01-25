@@ -23,7 +23,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
           <h3 className="text-gray-500 text-sm font-medium">Total Value</h3>
           <DollarSign className="h-8 w-8 text-green-500" />
@@ -33,7 +33,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
           <h3 className="text-gray-500 text-sm font-medium">Total Investment</h3>
           <PieChart className="h-8 w-8 text-blue-500" />
@@ -43,7 +43,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
           <h3 className="text-gray-500 text-sm font-medium">Top Performer</h3>
           <TrendingUp className="h-8 w-8 text-green-500" />
@@ -56,7 +56,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
           <h3 className="text-gray-500 text-sm font-medium">Worst Performer</h3>
           <TrendingDown className="h-8 w-8 text-red-500" />
@@ -69,7 +69,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
         </p>
       </div>
 
-      <div className="col-span-1 md:col-span-2 bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-102 hover:shadow-2xl hover:translate-y-1">
+      <div className="col-span-1 md:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-102 hover:shadow-2xl hover:translate-y-1">
         <h3 className="text-lg font-semibold mb-4">
           Portfolio Value Comparison
         </h3>
@@ -96,7 +96,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
         </ResponsiveContainer>
       </div>
 
-      <div className="col-span-1 md:col-span-2 bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-102 hover:shadow-2xl hover:translate-y-1">
+      <div className="col-span-1 md:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-102 hover:shadow-2xl hover:translate-y-1">
         <h3 className="text-lg font-semibold mb-4">Real-time Stock Prices</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={priceData}>

@@ -26,6 +26,31 @@ export default function App() {
     worstPerformer: initialStocks[0],
   });
 
+  // 1. Dark Mode State
+  const [darkMode, setDarkMode] = useState(() => {
+    const storedMode = localStorage.getItem('darkMode');
+    return storedMode ? JSON.parse(storedMode) : false;
+  });
+
+  // 2. Toggle Dark Mode Handler
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // 3. Apply Dark Mode Class to HTML Element
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  // Update localStorage whenever darkMode changes
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
   useEffect(() => {
     // Subscribe to real-time updates for each stock
     stocks.forEach(stock => {
@@ -115,19 +140,27 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center">
-            <Layout className="h-8 w-8 text-indigo-600 mr-3" />
-            <h1 className="text-3xl font-bold text-gray-900">Portfolio Tracker</h1>
+            <Layout className="h-8 w-8 text-indigo-600 dark:text-indigo-400 mr-3" />
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Portfolio Tracker</h1>
           </div>
-          <button
-            onClick={handleAddStockClick}
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105"
-          >
-            Add Stock
-          </button>
+          <div className="flex space-x-4">
+            <button
+              onClick={toggleDarkMode}
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105"
+            >
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
+            <button
+              onClick={handleAddStockClick}
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-all duration-300 transform hover:scale-105"
+            >
+              Add Stock
+            </button>
+          </div>
         </div>
 
         <div className="transition-all duration-500 transform">

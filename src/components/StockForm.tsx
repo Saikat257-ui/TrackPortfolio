@@ -38,7 +38,7 @@ export const StockForm: React.FC<StockFormProps> = ({ stock, onSubmit, onCancel 
   };
 
   return (
-    <div className={`bg-white rounded-xl shadow-lg p-6 transform transition-all duration-500 ${isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'} animate-fadeIn`}>
+    <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-500 ${isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'} animate-fadeIn`}>
       <h2 className="text-xl font-semibold mb-4">{stock ? 'Edit Stock' : 'Add Stock'}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="transition-all duration-300">

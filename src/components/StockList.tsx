@@ -10,7 +10,7 @@ interface StockListProps {
 
 export const StockList: React.FC<StockListProps> = ({ stocks, onEdit, onDelete }) => {
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200 overflow-hidden">
           <thead className="bg-gray-50">
@@ -24,7 +24,7 @@ export const StockList: React.FC<StockListProps> = ({ stocks, onEdit, onDelete }
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200">
             {stocks.map((stock) => {
               const gainLoss = ((stock.currentPrice - stock.buyPrice) / stock.buyPrice) * 100;
               const isPositive = gainLoss >= 0;
