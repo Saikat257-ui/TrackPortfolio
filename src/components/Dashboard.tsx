@@ -25,52 +25,52 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
-          <h3 className="text-gray-500 text-sm font-medium">Total Value</h3>
+          <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Value</h3>
           <DollarSign className="h-8 w-8 text-green-500" />
         </div>
-        <p className="mt-2 text-3xl font-bold text-gray-900 transition-all">
+        <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100 transition-all">
           ${metrics.totalValue.toLocaleString()}
         </p>
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
-          <h3 className="text-gray-500 text-sm font-medium">Total Investment</h3>
+          <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Investment</h3>
           <PieChart className="h-8 w-8 text-blue-500" />
         </div>
-        <p className="mt-2 text-3xl font-bold text-gray-900 transition-all">
+        <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100 transition-all">
           ${metrics.totalInvestment.toLocaleString()}
         </p>
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
-          <h3 className="text-gray-500 text-sm font-medium">Top Performer</h3>
+          <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Top Performer</h3>
           <TrendingUp className="h-8 w-8 text-green-500" />
         </div>
-        <p className="mt-2 text-xl font-bold text-gray-900">
+        <p className="mt-2 text-xl font-bold text-gray-900 dark:text-gray-100">
           {metrics.topPerformer.symbol}
         </p>
-        <p className="text-sm text-green-600">
+        <p className="text-sm text-green-600 dark:text-green-400">
           {((metrics.topPerformer.currentPrice - metrics.topPerformer.buyPrice) / metrics.topPerformer.buyPrice * 100).toFixed(2)}%
         </p>
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center justify-between">
-          <h3 className="text-gray-500 text-sm font-medium">Worst Performer</h3>
+          <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Worst Performer</h3>
           <TrendingDown className="h-8 w-8 text-red-500" />
         </div>
-        <p className="mt-2 text-xl font-bold text-gray-900">
+        <p className="mt-2 text-xl font-bold text-gray-900 dark:text-gray-100">
           {metrics.worstPerformer.symbol}
         </p>
-        <p className="text-sm text-red-600">
+        <p className="text-sm text-red-600 dark:text-red-400">
           {((metrics.worstPerformer.currentPrice - metrics.worstPerformer.buyPrice) / metrics.worstPerformer.buyPrice * 100).toFixed(2)}%
         </p>
       </div>
 
       <div className="col-span-1 md:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-102 hover:shadow-2xl hover:translate-y-1">
-        <h3 className="text-lg font-semibold mb-4">
+        <h3 className="text-lg font-semibold mb-4 dark:text-gray-300">
           Portfolio Value Comparison
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -97,7 +97,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ stocks, metrics }) => {
       </div>
 
       <div className="col-span-1 md:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-102 hover:shadow-2xl hover:translate-y-1">
-        <h3 className="text-lg font-semibold mb-4">Real-time Stock Prices</h3>
+        <h3 className="text-lg font-semibold mb-4 dark:text-gray-300">Real-time Stock Prices</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={priceData}>
             <CartesianGrid strokeDasharray="3 3" />
