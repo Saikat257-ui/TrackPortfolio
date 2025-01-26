@@ -11,7 +11,7 @@ export const StockForm: React.FC<StockFormProps> = ({ stock, onSubmit, onCancel 
   const [formData, setFormData] = useState({
     symbol: '',
     name: '',
-    quantity: 1,
+    quantity: 0,
     buyPrice: 0,
   });
   const [isClosing, setIsClosing] = useState(false);
@@ -22,14 +22,17 @@ export const StockForm: React.FC<StockFormProps> = ({ stock, onSubmit, onCancel 
         symbol: stock.symbol,
         name: stock.name,
         quantity: stock.quantity,
-        buyPrice: stock.buyPrice,
+        buyPrice: stock.buyPrice / stock.quantity,
       });
     }
   }, [stock]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit({
+      ...formData,
+      buyPrice: formData.buyPrice * formData.quantity,
+    });
   };
 
   const handleCancel = () => {
