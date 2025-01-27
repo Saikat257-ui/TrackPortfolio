@@ -26,18 +26,22 @@ export default function App() {
     worstPerformer: initialStocks[0],
   });
 
-  // 1. Dark Mode State
+  // Dark Mode State with System Default
   const [darkMode, setDarkMode] = useState(() => {
     const storedMode = localStorage.getItem('darkMode');
-    return storedMode ? JSON.parse(storedMode) : false;
+    if (storedMode !== null) {
+      return JSON.parse(storedMode);
+    }
+    // If no user preference, use system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  // 2. Toggle Dark Mode Handler
+  // Toggle Dark Mode Handler
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
-  // 3. Apply Dark Mode Class to HTML Element
+  // Apply Dark Mode Class to HTML Element
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -50,6 +54,20 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
+
+  // Listen to system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('darkMode')) { // Only update if user hasn't set a preference
+        setDarkMode(e.matches);
+      }
+    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
 
   useEffect(() => {
     // Subscribe to real-time updates for each stock
@@ -108,6 +126,7 @@ export default function App() {
 
   const handleAddStockClick = () => {
     setShowForm(true);
+    setEditingStock(null); // Ensure no stock is being edited
     setTimeout(() => {
       const stockForm = document.querySelector('.stock-form-section');
       if (stockForm) {
@@ -119,6 +138,12 @@ export default function App() {
   const handleEditStock = (stock: Stock) => {
     setEditingStock(stock);
     setShowForm(true);
+    setTimeout(() => {
+      const stockForm = document.querySelector('.stock-form-section');
+      if (stockForm) {
+        stockForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100); // Delay to ensure the form is rendered before scrolling
   };
 
   const handleUpdateStock = (stockData: Partial<Stock>) => {
@@ -147,13 +172,30 @@ export default function App() {
             <Layout className="h-8 w-8 text-indigo-600 dark:text-indigo-400 mr-3" />
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Portfolio Tracker</h1>
           </div>
-          <div className="flex space-x-4">
-            <button
-              onClick={toggleDarkMode}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105"
-            >
-              {darkMode ? 'Light Mode' : 'Dark Mode'}
-            </button>
+          <div className="flex space-x-4 items-center">
+            {/* Dark Mode Toggle */}
+            <label htmlFor="toggleDarkMode" className="flex items-center cursor-pointer">
+              <div className="mr-3 text-gray-700 dark:text-gray-300 font-medium">
+                {darkMode ? '🌙 Dark' : '☀️ Light'} Mode
+              </div>
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  id="toggleDarkMode"
+                  className="sr-only"
+                  checked={darkMode}
+                  onChange={toggleDarkMode}
+                />
+                <div className="w-10 h-4 bg-gray-400 dark:bg-gray-600 rounded-full shadow-inner"></div>
+                <div
+                  className={`dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition ${
+                    darkMode ? 'transform translate-x-full bg-indigo-600' : ''
+                  }`}
+                ></div>
+              </div>
+            </label>
+
+            {/* Add Stock Button */}
             <button
               onClick={handleAddStockClick}
               className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-all duration-300 transform hover:scale-105"
